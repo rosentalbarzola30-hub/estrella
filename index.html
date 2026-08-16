@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Valeria ✨</title>
+    <title>Para Valeria</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,7 @@
             box-shadow: 0 0 30px rgba(245, 158, 11, 0.6);
         }
 
-        /* UI Final con Tarjeta con Borde Dorado Elegante (Mejora 3) */
+        /* UI Final con Tarjeta con Borde Dorado Elegante */
         .ui-container {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -129,7 +129,7 @@
 
     <div class="ui-container" id="ui-gui">
         <div class="card-message" id="card-message">
-            <p>Gracias por cada momento compartido y por ser una persona tan brillante.</p>
+            <p>Gracias por cada momento compartido y por ser una persona tan brillante y unica.</p>
         </div>
     </div>
 
@@ -212,13 +212,19 @@
             animate();
         }
 
+        // FUNCIÓN MEJORADA: Ajusta el texto según la pantalla
         function generateTextPositions(text) {
             const canvas = document.createElement('canvas');
             canvas.width = 1024; canvas.height = 256;
             const ctx = canvas.getContext('2d');
+            
+            const isMobile = window.innerWidth < 600;
+            const fontSize = isMobile ? 52 : 80;
+            const scaleFactor = isMobile ? 0.032 : 0.045;
+
             ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, 1024, 256);
             ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 80px "Playfair Display", Georgia, serif';
+            ctx.font = `bold ${fontSize}px "Playfair Display", Georgia, serif`;
             ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
             ctx.fillText(text, 512, 128);
 
@@ -230,8 +236,8 @@
                     const index = (y * 1024 + x) * 4;
                     if (imgData.data[index] > 128) {
                         pixels.push({
-                            x: (x - 512) * 0.045,
-                            y: -(y - 128) * 0.045,
+                            x: (x - 512) * scaleFactor,
+                            y: -(y - 128) * scaleFactor,
                             z: (Math.random() - 0.5) * 0.3
                         });
                     }
@@ -306,7 +312,6 @@
             }
         }
 
-        // --- REPRODUCCIÓN DE MÚSICA GARANTIZADA AL DAR CLIC ---
         document.getElementById('start-btn').addEventListener('click', function() {
             if (isExperienceStarted) return;
             isExperienceStarted = true;
@@ -386,7 +391,7 @@
             const centerY = sfH / 2 - 40; 
             const scale = Math.min(sfW, sfH) / 600;
 
-            // 1. MEJORA 2: RESPLANDOR DORADO PALPITANTE (SOFT GLOW PULSE)
+            // 1. RESPLANDOR DORADO PALPITANTE
             const pulseRadius = (230 + Math.sin(timeSF * 1.5) * 20) * scale;
             const pulseAlpha = 0.35 + Math.sin(timeSF * 1.5) * 0.08;
 
